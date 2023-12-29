@@ -6,6 +6,10 @@ import '../controller/form_data_controller.dart';
 import '../model/DataForm.dart';
 
 class FormScreen extends StatefulWidget{
+  
+  final FormDataController formDataController;
+  FormScreen(this.formDataController);
+
 
   @override
   _FormScreen createState() => _FormScreen();
@@ -17,10 +21,6 @@ class _FormScreen extends State<FormScreen>{
   TextEditingController inputNumeroController = TextEditingController();
   TextEditingController inputEnderecoController = TextEditingController();
   TextEditingController inputNomePetController = TextEditingController();
-
-  FormDataController formDataController = FormDataController();
- 
-  
   
   @override
   Widget build(BuildContext contexto){
@@ -51,14 +51,14 @@ class _FormScreen extends State<FormScreen>{
             ElevatedButton(onPressed: (){
 
               DataForm dataForm = DataForm(inputNomeController.text, inputNumeroController.text, inputEnderecoController.text, inputNomePetController.text);
-              formDataController.adicionaPet(dataForm);
+              widget.formDataController.adicionaPet(dataForm);  // widget é usado para se referir a propriedades que sao passadas de pai para filho
+              Navigator.pop(context,  widget.formDataController.listaRegistros.length);
               
-              // print(inputNomeController.text);
-              // print(inputNumeroController.text);
-              // print(inputEnderecoController.text);
-              // print(inputNomePetController.text);
-
-
+              
+              // print(widget.formDataController.listaRegistros[0].nome);
+              // print(widget.formDataController.listaRegistros[0].numero);
+              // print(widget.formDataController.listaRegistros[0].endereco);
+              // print(widget.formDataController.listaRegistros[0].nomePet);
 
               }, 
               child: Text('Registrar')
