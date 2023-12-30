@@ -10,4 +10,8 @@ class FormDataController{
   void adicionaPet(DataForm dataForm){
     listaRegistros.add(dataForm);
   }
+
+  void atualizaLista(int comprimentoLista){
+    
+  }
 }

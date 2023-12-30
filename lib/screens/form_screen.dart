@@ -52,7 +52,7 @@ class _FormScreen extends State<FormScreen>{
 
               DataForm dataForm = DataForm(inputNomeController.text, inputNumeroController.text, inputEnderecoController.text, inputNomePetController.text);
               widget.formDataController.adicionaPet(dataForm);  // widget é usado para se referir a propriedades que sao passadas de pai para filho
-              Navigator.pop(context,  widget.formDataController.listaRegistros.length);
+              Navigator.pop(context,  widget.formDataController);
               
               
               // print(widget.formDataController.listaRegistros[0].nome);

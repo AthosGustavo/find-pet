@@ -25,9 +25,17 @@ class _InitialScreen extends State<InitialScreen>{
         itemBuilder: (BuildContext context, int index){
           DataForm dataForm = listaRegistros[index];
 
-          return ListTile(
-            title: Text('Nome: ${dataForm.nome}')
+          return Container(
+            child: Column(
+              children: [
+                Text('Nome: ${dataForm.nome}'),
+                Text('Contato: ${dataForm.numero}'),
+                Text('Endereço: ${dataForm.endereco}'),
+                Text('Nome do pet: ${dataForm.nomePet}'),
+              ],
+            ),
           );
+          
         },
         
       ),
@@ -41,11 +49,18 @@ class _InitialScreen extends State<InitialScreen>{
             
             )
           ).then((result){ //ESTUDAR SOBRE THEN
-            if (result != null && result is int){
-              setState(() {
+            //if (result != null && result is int){
+              setState(() { //O método setState nao aceita parametros
+                result.listaRegistros.length;
                 
+                // Mesmo que o escopo do setState esteja vazio, o Flutter
+                // percebe a mudança de estado e reconstrói automaticamente
+                // o widget. Isso resulta na reconstrução do ListView.builder,
+                // que por sua vez atualiza a lista de registros na interface
+                // do usuário.
+
               });
-            }
+            //}
           });
         },
         child: Icon(Icons.add),
