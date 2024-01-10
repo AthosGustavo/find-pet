@@ -1,3 +1,4 @@
+import 'package:find_pet/componentes/card_registro.dart';
 import 'package:find_pet/controller/form_data_controller.dart';
 import 'package:find_pet/model/DataForm.dart';
 import 'package:find_pet/screens/form_screen.dart';
@@ -25,16 +26,7 @@ class _InitialScreen extends State<InitialScreen>{
         itemBuilder: (BuildContext context, int index){
           DataForm dataForm = listaRegistros[index];
 
-          return Container(
-            child: Column(
-              children: [
-                Text('Nome: ${dataForm.nome}'),
-                Text('Contato: ${dataForm.numero}'),
-                Text('Endereço: ${dataForm.endereco}'),
-                Text('Nome do pet: ${dataForm.nomePet}'),
-              ],
-            ),
-          );
+          return CardRegistro(dataForm);
           
         },
         
@@ -51,7 +43,7 @@ class _InitialScreen extends State<InitialScreen>{
           ).then((result){ //ESTUDAR SOBRE THEN
             //if (result != null && result is int){
               setState(() { //O método setState nao aceita parametros
-                result.listaRegistros.length;
+                listaRegistros.length;
                 
                 // Mesmo que o escopo do setState esteja vazio, o Flutter
                 // percebe a mudança de estado e reconstrói automaticamente

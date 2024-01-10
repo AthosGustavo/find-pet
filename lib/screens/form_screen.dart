@@ -1,5 +1,6 @@
 
 
+import 'package:find_pet/componentes/card_registro.dart';
 import 'package:flutter/material.dart';
 
 import '../controller/form_data_controller.dart';
