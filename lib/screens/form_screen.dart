@@ -18,11 +18,16 @@ class FormScreen extends StatefulWidget{
 }
 
 class _FormScreen extends State<FormScreen>{
+  
   TextEditingController inputNomeController = TextEditingController();
   TextEditingController inputNumeroController = TextEditingController();
   TextEditingController inputEnderecoController = TextEditingController();
   TextEditingController inputNomePetController = TextEditingController();
-  File? imagemSelecionada;
+  TextEditingController inputEnderecoVistoPorUltimoController = TextEditingController();
+
+  
+  File? imgPet;
+  File? imgUltimoLugarVisto;
   
   Future<void> adicionarImagemPet()async {
     final imagePicker = ImagePicker();
@@ -30,9 +35,22 @@ class _FormScreen extends State<FormScreen>{
 
     setState((){
       if(pickImage != null){
-        imagemSelecionada = File(pickImage.path);
+        imgPet = File(pickImage.path);
       }else{
         //lança exceçao
+      }
+    });
+  }
+
+  Future<void> adicionarImgVistoPorUltimo()async{
+    final imagePicker = ImagePicker();
+    final pickImage = await imagePicker.pickImage(source: ImageSource.gallery);
+
+    setState((){
+      if(pickImage != null){
+        imgUltimoLugarVisto = File(pickImage.path);
+      }else{
+        imgUltimoLugarVisto = null;
       }
     });
   }
@@ -45,7 +63,7 @@ class _FormScreen extends State<FormScreen>{
         title: Text('Registrar pet')
       ),
       body: Container(
-        child:Column(
+        child:ListView(
           children: [
             TextFormField(
               controller: inputNomeController,
@@ -63,6 +81,10 @@ class _FormScreen extends State<FormScreen>{
               controller: inputNomePetController,
               decoration: InputDecoration(labelText: 'Nome do pet'),
             ),
+            TextFormField(
+              controller: inputEnderecoVistoPorUltimoController,
+              decoration: InputDecoration(labelText: 'Visto por último em...'),
+            ),
             InkWell(
               onTap:(){
                 adicionarImagemPet();
@@ -72,9 +94,28 @@ class _FormScreen extends State<FormScreen>{
                 height: 200,
                 decoration: BoxDecoration(
                   color: Colors.grey[200],
-                  image: imagemSelecionada != null
+                  image: imgPet != null
                     ? DecorationImage(
-                        image: FileImage(imagemSelecionada!),
+                        image: FileImage(imgPet!),
+                        fit: BoxFit.cover,
+                      )
+                    : null,
+                    
+                  ),
+                ),
+            ),
+            InkWell(
+              onTap:(){
+                adicionarImgVistoPorUltimo();
+              },
+              child: Ink(
+                width:double.infinity,
+                height: 200,
+                decoration: BoxDecoration(
+                  color: Colors.grey[200],
+                  image: imgUltimoLugarVisto != null
+                    ? DecorationImage(
+                        image: FileImage(imgUltimoLugarVisto!),
                         fit: BoxFit.cover,
                       )
                     : null,
@@ -83,9 +124,15 @@ class _FormScreen extends State<FormScreen>{
                 ),
             ),
             ElevatedButton(onPressed: (){
+              
+              if(imgUltimoLugarVisto != null){
+                DataForm dataForm = DataForm(nome:inputNomeController.text, numero:inputNumeroController.text, endereco:inputEnderecoController.text, nomePet:inputNomePetController.text, enderecoVistoPorUltimo: inputEnderecoVistoPorUltimoController.text, imgPet:imgPet, imgUltimoLugarVisto: imgUltimoLugarVisto);
+                widget.formDataController.adicionaPet(dataForm);  // widget é usado para se referir a propriedades que sao passadas de pai para filho
 
-              DataForm dataForm = DataForm(nome:inputNomeController.text, numero:inputNumeroController.text, endereco:inputEnderecoController.text, nomePet:inputNomePetController.text, fotoDoPet:imagemSelecionada);
-              widget.formDataController.adicionaPet(dataForm);  // widget é usado para se referir a propriedades que sao passadas de pai para filho
+              }else{
+                DataForm dataForm = DataForm(nome:inputNomeController.text, numero:inputNumeroController.text, endereco:inputEnderecoController.text, nomePet:inputNomePetController.text, enderecoVistoPorUltimo: inputEnderecoVistoPorUltimoController.text, imgPet:imgPet);
+                widget.formDataController.adicionaPet(dataForm);
+              }
               Navigator.pop(context,  widget.formDataController);
 
               }, 
