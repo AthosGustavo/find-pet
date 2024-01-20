@@ -65,19 +65,18 @@ class _CardRegistroState extends State<CardRegistro> {
                     color: Colors.grey.withOpacity(0.3),
                     spreadRadius: 2,
                     blurRadius: 5,
-                    offset: Offset(0,2),
+                    offset: Offset(0, 2),
                   )
-                ]
+                ],
               ),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   SizedBox(
                     child: Container(
                       width: 100,
                       height: 100,
-                      margin: EdgeInsets.only(right: 40),
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         border: Border.all(
@@ -92,52 +91,63 @@ class _CardRegistroState extends State<CardRegistro> {
                               )
                             : null,
                       ),
-                      
                     ),
                   ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    
-                    children: [
+                  Container(
+                    width: 120,
+                    decoration: BoxDecoration(
                       
-                      Padding(
-                        padding: const EdgeInsets.only(bottom:10.0),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          //mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Icon(
-                              Icons.pets, // Adicione um ícone que lembre um pet aqui
-                              color: Colors.green,
-                              size: 20.0,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                            Row(
+                              
+                              children: [
+                                Icon(
+                                  Icons.pets,
+                                  color: Colors.green,
+                                  size: 20.0,
+                                ),
+                                
+                                  Expanded(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(2.0),
+                                      child: Text(
+                                        widget.nomePet,
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis
+                                      ),
+                                    ),
+                                  ),
+                                //),
+                              ],
                             ),
-                            Padding(
-                            padding: const EdgeInsets.only(left:5.0),
-                            child: Text(widget.nomePet),
-                          ),
-                          ],
-                        ),
-                      ),
-                      
-                      Row(
-                        //crossAxisAlignment: CrossAxisAlignment.center,
-                        //mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Icon(
-                            
-                            Icons.location_on, // Adicione um ícone de localização aqui
-                            color: Colors.green,
-                            size: 20.0,
-                            
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left:5.0),
-                            child: Text(widget.enderecoVistoPorUltimo),
-                          ),
-                        ],
-                      ),
-                    ],
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.location_on,
+                                  color: Colors.green,
+                                  size: 20.0,
+                                ),
+                                
+                                  Expanded(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(2.0),
+                                      child: Text(
+                                        widget.enderecoVistoPorUltimo,
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis
+                                      ),
+                                    ),
+                                  ),
+                              ],
+                            ),
+                          //],
+                        //),
+                      ],
+                    ),
                   ),
                 ],
               ),
