@@ -1,4 +1,5 @@
 import 'package:find_pet/screens/initial_screen.dart';
+import 'package:find_pet/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       //theme: ThemeData.dark(),
       home: Scaffold(
-        body: InitialScreen(),
+        body: LoginScreen(),
       ),
     );
   }

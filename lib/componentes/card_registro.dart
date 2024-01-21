@@ -85,11 +85,11 @@ class _CardRegistroState extends State<CardRegistro> {
                         ),
                         color: Colors.grey[200],
                         image: widget.imgPet != null
-                            ? DecorationImage(
-                                image: FileImage(widget.imgPet!),
-                                fit: BoxFit.cover,
-                              )
-                            : null,
+                          ? DecorationImage(
+                              image: FileImage(widget.imgPet!),
+                              fit: BoxFit.cover,
+                            )
+                          : null,
                       ),
                     ),
                   ),
