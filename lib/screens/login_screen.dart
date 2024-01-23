@@ -1,61 +1,93 @@
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+import '../componentes/input_decoration_login.dart';
 
+class LoginScreen extends StatefulWidget {
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _LoginScreen createState() => _LoginScreen();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreen extends State<LoginScreen> {
+  bool login = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Texto'),
-      ),
-      body: Container(
-        width:370,
-        padding: EdgeInsets.all(16.0),
-        child: Form(
-          
-          child: ListView(
-            
-            children: [
-              TextFormField(
-                
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400
-                  ),
-                decoration:InputDecoration(
-                  
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Color(int.parse('0xFFADBBB0')), width: 2),
-                    borderRadius: BorderRadius.circular(25),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Color(int.parse('0xFF7C8A7F')), width: 2),
-                    borderRadius: BorderRadius.circular(25),
-                  ),
-                  
-                  labelText: 'Nome',
-                  labelStyle: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w400,
-                    color: Color(int.parse('0xFF132C29'))
-                  ),
-                  hintText: 'Digite o seu nome',
-                  prefixIcon: Icon(Icons.account_circle_rounded),
-                  floatingLabelBehavior: FloatingLabelBehavior.always
-                )
-              )
+        body: Padding(
+          padding: const EdgeInsets.symmetric(vertical:10),
+          child: Form(
+            child: Center(
               
-            ],
+              child: SingleChildScrollView(
+                child: Container(
+                  width: 360,
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+                        decoration: InputDecorationLogin(
+                          "E-mail", Icon(Icons.email),
+                          hintText: "Digite o seu e-mail"),
+                      ),
+                      SizedBox(
+                        height: 22,
+                      ),
+                      TextFormField(
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+                        decoration: InputDecorationLogin(
+                          "Senha", Icon(Icons.lock),
+                          hintText: "Digite a sua senha"
+                        ),
+                        obscureText: true),
+                      SizedBox(
+                        height: 22,
+                      ),
+                      Visibility(
+                        visible: !login,
+                        child: Column(
+                          children: [
+                            TextFormField(
+                                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+                                decoration: InputDecorationLogin(
+                                  "Confirme", Icon(Icons.check_circle),
+                                  hintText: "Repita a senha"
+                                ),
+                                obscureText: true),
+                            SizedBox(height: 22,),
+                            TextFormField(
+                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+                              decoration: InputDecorationLogin(
+                                "Nome", Icon(Icons.account_circle_rounded),
+                                hintText: "Digite o seu nome"
+                              ),
+                            ),
+                            SizedBox(height: 22,),
+                          ],
+                      )),    
+                      SizedBox(
+                        //SizedBox foi usado para aumentar a largura do botao
+                        width: 360,
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          child: Text('Entrar'),
+                        ),
+                      ),
+                      SizedBox(height: 10,),
+                      Divider(),
+                      TextButton(
+                          onPressed: () {
+                            setState(() {
+                              login = !login;
+                            });
+                          },
+                          child: Text((login)
+                              ? 'Ainda não tem uma conta? Cadastre-se'
+                              : 'Já tem uma conta? Entre'))
+                    ]),
+                ),
+              )
+            ),
           ),
-        ),
-      ),
-    );
+        ));
   }
-
 }
