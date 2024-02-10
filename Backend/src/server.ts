@@ -2,8 +2,10 @@ import "reflect-metadata";
 import express from "express";
 import AppDataSource from "./database/DataSource";
 import { DATA_BASE_PORT } from "./config/env-variables";
+import { routes } from "./routes";
 
 const app = express();
+app.use(routes);
 
 (async () => {
   try{
