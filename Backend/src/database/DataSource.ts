@@ -1,11 +1,6 @@
-
 import { DataSource } from "typeorm";
 import { envVariables } from "../config/env-variables";
 import { User } from "../entities/User";
-
-
-
-
 
 
 const [DATA_BASE_HOST, DATA_BASE_TYPE, DATA_BASE_USER, DATA_BASE_PASSWORD, DATA_BASE] = envVariables;
