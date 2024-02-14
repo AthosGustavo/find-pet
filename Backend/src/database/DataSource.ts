@@ -1,6 +1,6 @@
 import { DataSource } from "typeorm";
 import { envVariables } from "../config/env-variables";
-//import { User } from "../entities/User";
+import { User } from "../entities/User/User";
 
 
 const [DATA_BASE_HOST, DATA_BASE_TYPE, DATA_BASE_USER, DATA_BASE_PASSWORD, DATA_BASE] = envVariables;
@@ -10,7 +10,7 @@ const AppDataSource = new DataSource({
   username: DATA_BASE_USER,
   password: DATA_BASE_PASSWORD,
   database: DATA_BASE,
-  entities:[`${__dirname}/**/entities/*.{ts,js}`],
+  entities:[User],
   migrations: [`${__dirname}/**/migrations/*.{ts,js}`],
   migrationsTableName: "migrations",
   
