@@ -7,7 +7,7 @@ export class UserController {
     try {
       
       const objectUserService: UserService = new UserService();
-      const result = await objectUserService.getAllUsers();
+      const result = await objectUserService.getUsersService();
       
       res.status(200).json(result); // Enviar a resposta como JSON
     
