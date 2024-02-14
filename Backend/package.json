@@ -7,7 +7,7 @@
     "dev": "ts-node-dev --transpile-only src/server.ts",
     "typeorm": "ts-node-dev node_modules/.bin/typeorm",
     "build": "tsc",
-    "migration:generate":"typeorm-ts-node-commonjs -d ./src/database/DataSource.ts migration:generate ./src/migrations/default",
+    "migration:generate":"typeorm-ts-node-commonjs -d ./src/database/DataSource.ts migration:generate ./src/database/migrations/default",
     "migration:run":"typeorm-ts-node-commonjs -d ./src/database/DataSource.ts migration:run"
   },
   "dependencies": {

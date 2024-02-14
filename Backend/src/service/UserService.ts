@@ -1,12 +1,22 @@
 import { UsersRepository } from "./../repositories/UsersRepository";
-import { User } from "../entities/User";
+import { User } from "../entities/User/User";
 
 
 export class UserService{
 
-  async getUsersService():Promise<User[]>{
+  private usersRepository: UsersRepository;
 
-    const usersRepository = new UsersRepository();
-    return usersRepository.getUsersRepository();
+  constructor(){
+    this.usersRepository = new UsersRepository();
   }
+  
+  async getUserService():Promise<User[]>{
+    return await this.usersRepository.getUserRepository();
+  }
+
+  async createUserService(user: User){
+    return await this.usersRepository.createUserRepository(user);
+  }
+
+
 }
