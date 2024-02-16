@@ -1,19 +1,23 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class LoginService {
-  static const String apiUrl = "http://localhost:8080";
+  static const String apiUrl = "http://192.168.0.108:8080";
+
+  Uri getUri(String endpoint){
+    var apiUri = Uri.parse("${apiUrl}${endpoint}");
+    return apiUri;
+  }
 
   Future loginUser(String email, String senha)async{
-    final uri = Uri.parse("http://192.168.0.114:8080/login");
-    
     final Map<String, dynamic> dadosLogin = {
       "email":email,
       "senha":senha
     };
 
     final response = await http.post(
-      uri,
+      getUri("/login"),
       body:jsonEncode(dadosLogin),
       headers: {
         'Content-Type': 'application/json', 
