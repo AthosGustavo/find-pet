@@ -25,4 +25,10 @@ export class UsersRepository{
 
   }
 
+  async getUserLoginRepository(email:string, senha:string):Promise<{userDTO: UserDTO}>{
+    const isUserExist = await this.userRepository.findOne({where:{email, senha}});
+    const response = {userDTO:isUserExist};
+    return response;
+  }
+
 }
