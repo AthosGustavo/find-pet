@@ -1,9 +1,5 @@
-
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Request, Response } from "express";
 import { UserService } from "../service/UserService";
-import AppDataSource from "../database/DataSource";
-import { User } from "../entities/User/User";
 
 export class UserController {
 

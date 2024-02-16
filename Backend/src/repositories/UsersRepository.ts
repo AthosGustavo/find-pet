@@ -29,6 +29,11 @@ export class UsersRepository{
     const isUserExist = await this.userRepository.findOne({where:{email, senha}});
     const response = {userDTO:isUserExist};
     return response;
+
+    /*
+      Promise<{userDTO: UserDTO}> : Declara que o retorno será uma propriedade do tipo userDTO do tipo UserDTO
+      const response = {userDTO:isUserExist} : TIPAGEM, a variável tipada como UserDTO, agora é chave do retorno da requisição 
+    */
   }
 
 }
