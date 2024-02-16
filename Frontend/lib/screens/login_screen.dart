@@ -1,3 +1,5 @@
+import 'package:find_pet/screens/initial_screen.dart';
+import 'package:find_pet/services/login_service.dart';
 import 'package:flutter/material.dart';
 
 import '../componentes/input_decoration_login.dart';
@@ -8,7 +10,11 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreen extends State<LoginScreen> {
+  
   bool login = true;
+  TextEditingController inputEmailController = TextEditingController();
+  TextEditingController inputSenhaController = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +30,7 @@ class _LoginScreen extends State<LoginScreen> {
                   child: Column(
                     children: [
                       TextFormField(
+                        controller: inputEmailController,
                         style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
                         decoration: InputDecorationLogin(
                           "E-mail", Icon(Icons.email),
@@ -33,6 +40,7 @@ class _LoginScreen extends State<LoginScreen> {
                         height: 22,
                       ),
                       TextFormField(
+                        controller: inputSenhaController,
                         style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
                         decoration: InputDecorationLogin(
                           "Senha", Icon(Icons.lock),
@@ -68,7 +76,22 @@ class _LoginScreen extends State<LoginScreen> {
                         //SizedBox foi usado para aumentar a largura do botao
                         width: 360,
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                            LoginService loginService = LoginService();
+                            final response = await loginService.loginUser(inputEmailController.text,inputSenhaController.text);
+                            
+                            if(response["acesso"] == "negado"){
+                              print(response["mensagem"]);
+                            }else{
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context){
+                                  return InitialScreen();
+                                })
+                              );
+                            }
+
+                          },
                           child: Text('Entrar'),
                         ),
                       ),
