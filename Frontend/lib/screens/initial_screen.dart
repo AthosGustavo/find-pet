@@ -19,7 +19,8 @@ class _InitialScreen extends State<InitialScreen>{
     
     return Scaffold(
       appBar: AppBar(
-        title: Text('Registrar pet')
+        title: Text('Registrar pet'),
+        automaticallyImplyLeading: false,
       ),
       body: ListView.builder( //estudar a sintaxe de ListView.builder
         itemCount: listaRegistros.length,

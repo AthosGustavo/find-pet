@@ -3,6 +3,7 @@
 import { Request, Response } from "express";
 import { UserService } from "../service/UserService";
 import AppDataSource from "../database/DataSource";
+import { User } from "../entities/User/User";
 
 export class UserController {
 
@@ -18,6 +19,20 @@ export class UserController {
       console.error("Error while fetching users", error);
       res.status(500).json({ message: "Internal server error" }); // Tratamento de erro
     }
+  }
+
+  async getUserLoginController(req: Request, res:Response):Promise<any>{
+
+    const {email, senha} = req.body;
+    const userService = new UserService();
+    const response = await userService.getUserLoginService(email, senha);
+    
+    if(response.userDTO === null){
+      res.status(404).json({mensagem: "Usuário não cadastrado.",acesso:"negado"});
+    }else{
+      res.status(200).json({acesso:"permitido"});
+    }
+    
   }
 
   async createUserController(req: Request, res: Response): Promise<void> {
