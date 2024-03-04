@@ -21,6 +21,4 @@ export class UserService{
   async getUserLoginService(email: string, senha:string):Promise<any>{
     return this.usersRepository.getUserLoginRepository(email, senha);
   }
-
-
 }

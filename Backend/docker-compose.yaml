@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  mysql:
+    build:
+      context: .
+      dockerfile: ./docker/mysql/Dockerfile
+    container_name: findpet-mysql
+    env_file:
+      - .env
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    ports:
+      - "3306:3306"
+    networks:
+      - findpet-network
+    volumes:
+      - /home/athos/dumps:/docker-entrypoint-initdb.
+
+  nodejs:
+    build:
+      context: .
+      dockerfile: ./docker/node/Dockerfile
+    container_name: findpet-node
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    restart: always
+    networks:
+      - findpet-network
+
+networks:
+  findpet-network:
+    driver: bridge
